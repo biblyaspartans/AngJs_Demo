@@ -1,0 +1,12 @@
+//left navigation menu colors and font weights
+.nav-left-menu{
+  color:$color-deeper-black;
+  font-weight:$font-weight-bold;
+  font-size: $font-size-small;
+
+  .nav-left-sub-menu{
+    margin-top:5px;
+    color:$color-lighter-black-2;
+    font-size: $font-size-smaller;
+  }
+}

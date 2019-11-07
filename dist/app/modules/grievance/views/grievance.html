@@ -1,0 +1,60 @@
+<script>
+    $(document).ready(function () {
+        $('ul li ').removeClass('active');
+        $('#liGrievance').addClass('active');
+    });
+</script>
+
+<div class="transaction_div_background panel-body">
+    <loading></loading>
+    <form name="frmGrievances" novalidate="novalidate" ng-submit="">
+        <div>&nbsp;</div>
+        <div class="row">
+            <div class="col-md-2">
+                <label class="labelmargin_top">Product</label>
+            </div>
+            <div class="col-md-3 form-group">
+                <select class="form-control" name="ddlProduct" ng-model="Grievances.Product" required="required">
+                    <option value="">Select Product</option>
+                    <option ng-repeat="product in ProductsList" value="{{product._id}}">{{product.ProductType}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label class="labelmargin_top">Grievance Type</label>
+            </div>
+            <div class="col-md-3 form-group">
+                <select class="form-control" name="ddlGrievancesType" ng-model="Grievances.GrievancesType" required="required">
+                    <option value="">Select Grievance Type</option>
+                    <option ng-repeat="grievancestypelist in GrievancesTypeList" value="{{grievancestypelist._id}}">{{grievancestypelist.GrievancesType}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label class="labelmargin_top">Reference Number</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" placeholder="enter order number" class="form-control" ng-model="Grievances.ReferenceNumber" reg-ex-input reg-ex="^[0-9]*$">
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="row">
+            <div class="col-md-2">
+                <label class="labelmargin_top">Query</label>
+            </div>
+            <div class="col-md-5 form-group">
+                <textarea placeholder="enter your query" class="form-control lock_textarea" rows="6" ng-model="Grievances.QueryDetails" required="required"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-offset-2 col-md-2">
+                <button id="btnBackGrievance" type="button" class="btn btncolor_red btn_width btnmargin_top" ng-click="BackToGrievancesList();">Back</button>
+            </div>
+            <div class="col-md-2">
+                <button id="btnSaveGrievance" type="submit" class="btn btncolor_green btn_width btnmargin_top" ng-click="SaveGrievance_Click(frmGrievances);" ng-disabled="IsGrievancesDisbale">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

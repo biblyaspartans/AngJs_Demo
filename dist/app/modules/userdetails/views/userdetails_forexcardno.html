@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    $("#divForexCardNumber").click(function () {
+        $("#txtForexCardNumber").focus();
+    });
+</script>
+
+<div class="row">
+    <div class="margin_top">
+        <br /><br />
+        <h1 class="text-center h1_effect h1_margin text_color">Enter Forex Card Number</h1>
+    </div>
+</div>
+<div class="container-fluid">
+    <form name="frmPassportNo" novalidate="novalidate">
+        <section class="main">
+            <ul class="ch-grid form-group">
+                <li>
+                    <div id="divForexCardNumber" class="ch-item-green ch-img-25 Divitem-format">
+                        <div class="ch-info-green">
+                            <h3>Forex Card Number</h3>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control textbox_single" placeholder="enter last 4 digit" id="txtForexCardNumber" ng-model="ForexCardNumber" reg-ex-input reg-ex="^[0-9]*$" ng-minlength="4" ng-maxlength="4" step="any" />
+                </li>
+            </ul>
+
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div class="row btnmargin">
+                <div class="col-md-offset-5 col-md-2 ">
+                    <button type="button" class="btn btncolor btn_width95" ng-click="ForexCardNo_Click();">Continue</button>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

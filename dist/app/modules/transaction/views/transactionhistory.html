@@ -1,0 +1,52 @@
+<script>
+    $(document).ready(function () {
+        $('ul li ').removeClass('active');
+        $('#liTrackTransaction').addClass('active');
+    });
+</script>
+
+
+<div class="transaction_div_background panel-body">
+    <loading></loading>
+    <div class="table-responsive" ng-hide="!TransactionDetailsDiv">
+        <table ng-table="TransactionDetailsTable" class="table table-bordered table-striped" show-filter="true">
+            <tr ng-repeat="trn in $data | filter: TransactionHistoryFilter ">
+                <td title="'Order Number'" filter="{ VKCOrderNo: 'text'}" sortable="'VKCOrderNo'">
+                    {{trn.VKCOrderNo}}
+                </td>
+                <td data-title="'Order Date'" filter="{ CreatedDatetime: 'text'}" sortable="'CreatedDatetime'">
+                    {{trn.CreatedDatetime | date : 'yyyy-MM-dd'}}
+                </td>
+                <td data-title="'Product'" filter="{ ProductType: 'text'}" sortable="'ProductTypeId.ProductType'">
+                    {{trn.ProductTypeId.ProductType}}
+                </td>
+                <td data-title="'Forex Amount'" ng-repeat="frx in trn.ForexDetails" filter="{ ForexAmount: 'text'}" sortable="'ForexAmount'">
+                    {{frx.ForexAmount}}
+                </td>
+                <td data-title="'Forex Currency'" ng-repeat="frx in trn.ForexDetails" filter="{ CurrencyName: 'text'}" sortable="'ForexCurrencyId.CurrencyName'">
+                    {{frx.ForexCurrencyId.CurrencyName}}
+                </td>
+                <td data-title="'Forex Rate'" ng-repeat="frx in trn.ForexDetails" align="center" filter="{ ForexRate: 'text'}" sortable="'ForexRate'">
+                    {{frx.ForexRate}}
+                </td>
+                <td data-title="'Total Amount'" ng-repeat="frx in trn.ForexDetails" align="center" filter="{ INRAmount: 'text'}" sortable="'INRAmount'">
+                    {{frx.INRAmount | currency: '&#8377;'}}
+                </td>
+                <td data-title="'Status'" align="center" filter="{ Status: 'text'}" sortable="'Status'">
+                    {{trn.Status}}
+                </td>
+                <!--<td data-title="'View'" align="center">
+                    <input type="image" src="assets/images/View.png" ng-click="toggleModal(grv._id);" />
+                </td>-->
+            </tr>
+        </table>
+    </div>
+    <div class="row" ng-hide="TransactionDetailsDiv">
+        <div class="col-md-12 nodatadiv_background_color">
+            <div class="centeralign">
+                <h4>No records to display data in grid</h4>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,25 @@
+{
+  "name": "StudentPaisa",
+  "version": "1.0.0",
+  "description": "Application to buy forex",
+  "main": "gruntfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-css": "^0.5.4",
+    "grunt-purifycss": "^0.1.1",
+    "grunt-sass": "^1.1.0",
+    "grunt-serve": "^0.1.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "StudentPaisa_forex"
+  ],
+  "author": "Rahuls",
+  "license": "ISC"
+}

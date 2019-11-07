@@ -1,0 +1,146 @@
+<div class="login-page">
+    <div class="form-page">
+        <loading></loading>
+        <form id="frmregistration" name="regForm" class="register-form" novalidate="novalidate" ng-submit="">
+            <h3 class="header_registration ">REGISTER</h3>
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>First Name</label>
+                    <input required="required" name="FirstName" type="text" ng-model="FirstName" ng-pattern="/^[a-zA-Z\sa-zA-Z]*$/">
+                    <div ng-messages="regForm.FirstName.$error" role="alert" ng-if="regForm.FirstName.$touched">
+                        <div ng-message="required">FirstName is required</div>
+                        <div ng-message="pattern">First name should be alphabet</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Last Name</label>
+                    <input required="required" name="LastName" type="text" ng-model="LastName" ng-pattern="/^[a-zA-Z\sa-zA-Z]*$/">
+                    <div ng-messages="regForm.LastName.$error" role="alert" ng-if="regForm.LastName.$touched">
+                        <div ng-message="required">Lastname is required</div>
+                        <div ng-message="pattern">Last name should be alphabet </div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Contact Number</label>
+                    <input required="required" name="ContactNumber" type="text" ng-model="ContactNumber" ng-pattern="/^[0-9]*$/" ng-minlength="10" ng-maxlength="10" step="any">
+                    <div ng-messages="regForm.ContactNumber.$error" role="alert" ng-if="regForm.ContactNumber.$touched">
+                        <div ng-message="required">Contact number is required</div>
+                        <div ng-message="pattern">Contact number should be numeric</div>
+                        <div ng-message-exp="['minlength', 'maxlength']">Contact number length must be 10</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Email</label>
+                    <input id="txtEmail" type="email" ng-model="Email" name="Email" required="required" step="any" ng-pattern="/^.+@.+\..+$/">
+                    <div ng-messages="regForm.Email.$error" role="alert" ng-if="regForm.Email.$touched">
+                        <div ng-message="required">Email is required</div>
+                        <div ng-message="pattern">Invalid e-mail address</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Password</label>
+                    <input id="txtPassword" type="password" ng-model="NewPassword" name="NewPassword" required="required" step="any">
+                    <div ng-messages="regForm.NewPassword.$error" role="alert" ng-if="regForm.NewPassword.$touched">
+                        <div ng-message="required">Password is required</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Confirm Password</label>
+                    <input id="txtConfirmPassword" type="password" ng-model="ConfirmPassword" name="ConfirmPassword" required="required" ng-pattern="NewPassword">
+                    <div ng-messages="regForm.ConfirmPassword.$error" role="alert" ng-if="regForm.ConfirmPassword.$touched">
+                        <div ng-message="required">ConfirmPassword is required</div>
+                        <div ng-message="pattern">Password & Confirm password should be same</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <button id="btnRegister" class="loginbtn" ng-click="Registration_Click();">Register</button>
+            <p class="message centeralign">Already registered..?<a id="a" ng-click="showlogin();" href="">Login</a></p>
+        </form>
+        <form id="frmlogin" name="loginform" novalidate="novalidate" ng-submit="">
+            <h3 class="header_login">LOGIN</h3>
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Email Id</label>
+                    <input id="txtUsername" type="text" ng-model="Username" name="Username" required="required" ng-pattern="/^.+@.+\..+$/">
+                    <div ng-messages="loginform.Username.$error" role="alert" ng-if="loginform.Username.$touched">
+                        <div ng-message="required">Email is required</div>
+                        <div ng-message="pattern">Invalid email address</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row" class="form-group_margin">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Password</label>
+                    <input id="txtPassword" type="password" ng-model="Password" name="Password" required="required">
+                    <div ng-messages="loginform.Password.$error" role="alert" ng-if="loginform.Password.$touched">
+                        <div ng-message="required">Password is required</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <input id="chkremember" type="checkbox" ng-model="RememberMe" ng-checked="IsRemember" />&nbsp;<label style="font-weight:100;" for="chkremember">Remember me</label><a class="rightalign" href="" ng-click="showforgot();">Forgot password?</a>
+    <button id="btnLogin" class="loginbtn" ng-click="Login_Click();">login</button>
+    <p class="message centeralign">
+        Don't have account..?&nbsp;<a ng-click="showRegistration();" href="">Register</a>
+    </p>
+
+    <p class="message centeralign">
+        or register with
+    </p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <button id="btnLogin" class="btnsocial" style="background-color:#3B5998">facebook</button>
+        </div>
+
+        <div class="col-md-6">
+            <button id="btnLogin" class="btnsocial" style="background-color:#DD4B39">Google+</button>
+        </div>
+    </div>
+</form>
+        <form id="frmforgotpassword" class="forgotpassword-form" name="forgotform" novalidate="novalidate" ng-submit="">
+            <h3 class="header_login">FORGOT PASSWORD</h3>
+            <small class="text-col_blue bold">Enter your email address to reset your password</small>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block form-group_margin" flex-gt-sm="">
+                    <label>Email Id</label>
+                    <input id="txtEmail" type="email" ng-model="ForgotEmail" name="ForgotEmail" required="required" ng-pattern="/^.+@.+\..+$/">
+                    <div ng-messages="forgotform.ForgotEmail.$error" role="alert" ng-if="forgotform.ForgotEmail.$touched">
+                        <div ng-message="required">Email is required</div>
+                        <div ng-message="pattern">Invalid email address</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <button id="btnForgotPassword" class="loginbtn" ng-click="ForgotPassword_Click()">Submit</button>
+            <p class="message centeralign">Already registered..?<a id="a" ng-click="showlogin();" href="">Login</a></p>
+        </form>
+    </div>
+</div>

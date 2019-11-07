@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="margin_top">
+        <br /><br />
+        <h1 class="text-center h1_effect h1_margin text_color">Your Nationality..?</h1>
+    </div>
+</div>
+<div class="container-fluid">
+    <section class="main">
+        <ul class="ch-grid">
+            <li>
+                <div id="divNationality1" class="ch-item-green ch-img-18 Divitem-format" ng-click="SetDefaultNationality(); nationality_sel = 'Indian'">
+                    <div class="ch-info-green">
+                        <h3>Indian</h3>
+                    </div>
+                </div>
+                <label for="optindian" class="label_headingeffect">Indian</label>
+                <input id="optindian" type="radio" name="nationality" ng-model="nationality_sel" ng-change="SetDefaultNationality();" value="Indian" class="text-center">
+            </li>
+            <li>
+                <div id="divNationality2" class="ch-item-purple ch-img-17 Divitem-format" ng-click="SetOtherNationality();">
+                    <div class="ch-info-purple">
+                        <h3>Other</h3>
+                    </div>
+                </div>
+                <label for="txtOtherNationality" class="label_headingeffect">Other</label>
+                <input type="text" id="txtOtherNationality" placeholder="enter nationality" ng-model="txtnationality" ng-change="SetOtherNationality();" class="text-center textbox_effect">
+        </ul>
+
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div class="row btnmargin">
+            <div class="col-md-offset-5 col-md-2 ">
+                <button type="button" class="btn btncolor btn_width95" ng-click="Nationality_Click();">Continue</button>
+            </div>
+        </div>
+    </section>
+</div>

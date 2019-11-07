@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="margin_top">
+        <br /><br />
+        <h1 class="text-center h1_effect h1_margin text_color">Where Do You Live Currently..?</h1>
+    </div>
+</div>
+<div class="container-fluid">
+    <section class="main">
+        <ul class="ch-grid">
+            <li>
+                <div id="divLive1" class="ch-item-blue ch-img-14 Divitem-format" ng-click="live_sel = 'Mumbai'; SetDefaultCity()">
+                    <div class="ch-info-blue">
+                        <h3>Mumbai</h3>
+                    </div>
+                </div>
+                <label for="optlive1" class="label_headingeffect">Mumbai</label>
+                <input id="optlive1" type="radio" name="rdolive" ng-model="live_sel" value="Mumbai" class="text-center" ng-change="SetDefaultCity();">
+            </li>
+            <li>
+                <div id="divLive2" class="ch-item-green ch-img-15 Divitem-format" ng-click="live_sel = 'Bangalore'; SetDefaultCity()">
+                    <div class="ch-info-green">
+                        <h3>Bangalore</h3>
+                    </div>
+                </div>
+                <label for="optlive2" class="label_headingeffect">Bangalore</label>
+                <input id="optlive2" type="radio" name="rdolive" ng-model="live_sel" value="Bangalore" class="text-center" ng-change="SetDefaultCity();">
+            </li>
+            <li>
+                <div id="divLive3" class="ch-item-purple ch-img-16 Divitem-format" ng-click="live_sel = 'Delhi'; SetDefaultCity() ">
+                    <div class="ch-info-purple">
+                        <h3>Delhi</h3>
+                    </div>
+                </div>
+                <label for="optlive3" class="label_headingeffect">Delhi</label>
+                <input id="optlive3" type="radio" name="rdolive" ng-model="live_sel" value="Delhi" class="text-center" ng-change="SetDefaultCity();">
+            </li>
+            <li>
+                <div id="divLive4" class="ch-item-orange ch-img-17 Divitem-format" ng-click="SetOtherCity();">
+                    <div class="ch-info-orange">
+                        <h3>Other</h3>
+                    </div>
+                </div>
+                <label for="txtOtherCity" class="label_headingeffect">Other</label>
+                <input type="text" id="txtOtherCity" placeholder="enter your city" ng-model="txtCity" value="Other" ng-change="SetOtherCity()" class="text-center othercity" reg-ex-input reg-ex="^[a-zA-Z0-9_]*$">
+            </li>
+        </ul>
+
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div class="row btnmargin">
+            <div class="col-md-offset-5 col-md-2 ">
+                <button type="button" class="btn btncolor btn_width95" ng-click="Live_Click();">Continue</button>
+            </div>
+        </div>
+    </section>
+</div>

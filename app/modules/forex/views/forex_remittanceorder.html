@@ -1,0 +1,673 @@
+﻿<script type="text/javascript">
+    $(function () {
+        $("#txtdob").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', maxDate: new Date(), yearRange: "-100:+0" }).val();
+        $("#txttraveldate").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+10" }).val();
+        $("#txtpassportissuedate").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+0" }).val();
+        $("#txtpassportexpirydate").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+10" }).val();
+    });
+
+    $(document).ready(function () {
+        $('ul li ').removeClass('active');
+        $('#liForex').addClass('active');
+    });
+
+    $(document).ready(function () {
+        $('#btnApply').click(function () {
+            $('#liTab1').removeClass('active');
+            $('#liTab2').addClass('active');
+        });
+
+        $('#btnContinueConfirm').click(function () {
+            $('#liTab2').removeClass('active');
+            $('#liTab3').addClass('active');
+        });
+
+        $('#btnBackMakePayment').click(function () {
+            $('#liTab7').removeClass('active');
+            $('#liTab6').addClass('active');
+        });
+        
+        $('#btnBackBeneficary').click(function () {
+            $('#liTab6').removeClass('active');
+            $('#liTab5').addClass('active');
+        });
+
+        $('#btnBackDocumentUpload').click(function () {
+            $('#liTab5').removeClass('active');
+            $('#liTab4').addClass('active');
+        });
+
+        $('#btnBackTraveller').click(function () {
+            $('#liTab4').removeClass('active');
+            $('#liTab3').addClass('active');
+        });
+
+        $('#btnBackPersonal').click(function () {
+            $('#liTab3').removeClass('active');
+            $('#liTab2').addClass('active');
+        });
+
+        $('#btnBackConfirm').click(function () {
+            $('#liTab2').removeClass('active');
+            $('#liTab1').addClass('active');
+        });
+    });
+
+</script>
+<div id="Tabs" role="tabpanel" class="tabpanel_background" ng-cloak>
+    <div id="Tabs" role="tabpanel" class="tabpanel_background">
+        <div class="row divheader_backcolor">
+            <div class="col-md-4">
+                <h3 class="freshCard_header">{{PageName}}</h3>
+            </div>
+        </div>
+        <section class="tabbable" ng-init="tab = 1">
+            <ul class="nav nav-tabs " role="tablist">
+                <li id="liTab1" class="active disabled"><a>Foreign Exchange Details</a></li> 
+                <li id="liTab2" class="disabled"><a>Confirm Booking</a></li>   
+                <li id="liTab3" class="disabled"><a>Personal Details</a></li> 
+                <li id="liTab4" class="disabled"><a>Traveller Details</a></li>
+                <li id="liTab5" class="disabled"><a>Document Upload</a></li>
+                <li id="liTab6" class="disabled"><a>Beneficary Details</a></li>
+                <li id="liTab7" class="disabled"><a>Make Payment</a></li>
+            </ul>
+            <div class="tab-content panel-body tabpanel_div_background">
+                <!-- Tab Panel for foreignexchangedetails -->
+                <div role="tabpanel" class="tab-pane active" id="foreignexchangedetails" ng-show="tab === 1">
+                    <form name="frmForeignExchangeDetails" novalidate="novalidate" ng-submit="">
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Product</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlProducts" ng-model="NewCardDetails.ProductTypeId" required="required" disabled>
+                                    <option value="">Select Product</option>
+                                    <option ng-repeat="product in ProductsList" value="{{product._id}}">{{product.ProductType}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Principal</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlPrincipal" ng-init="ForexDetails.Principal='HDFC'" ng-model="ForexDetails.Principal" required="required">
+                                    <option value="">Select</option>
+                                    <option value="HDFC">HDFC Bank</option>
+                                    <option value="AXIS">AXIS Bank</option>
+                                    <option value="ICICI">ICICI Bank</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Foreign Currency</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlCurrency" ng-model="ForexDetails.ForexCurrencyId" required="required" ng-options="x as x.CurrencyName for x in CurrencyList track by x._id">
+                                    <option value="">Select Currency</option>
+                                    <!--<option ng-repeat="currency in CurrencyList" value="{{currency._id}}">{{currency.CurrencyName}}</option>-->
+                                </select>
+                                <!--<select class="form-control" name="ddlCurrency" ng-model="ForexDetails.ForexCurrencyId" required="required">
+                                    <option value="">Select Currency</option>
+                                    <option ng-repeat="currency in CurrencyList" value="{{currency._id}}">{{currency.CurrencyName}}</option>
+                                </select>-->
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Enter Amount</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="number" min="1" name="txtAmount" placeholder="enter amount" required="required" class="form-control" reg-ex-input reg-ex="^[0-9]*$" ng-model="ForexDetails.ForexAmount" ng-pattern="/^[0-9]*$/" ng-minlength="1" ng-maxlength="10" step="any">
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btnGetQuote" type="submit" class="btn btncolor btn_width btnmargin_top" ng-click="GetQuote(NewCardDetails.ProductTypeId, ForexDetails.Principal, ForexDetails.ForexCurrencyId, ForexDetails.ForexAmount)" ng-disabled="frmForeignExchangeDetails.$invalid">Get Quote</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                    </div>
+                    <loading></loading>
+                    <div role="tabpanel" class="tab-pane active " id="foreignexchangedetails" ng-show="DivIsVisible">
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-2 col-md-offset-5">
+                                <label>Results</label>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="Wedgets1" class="table table-hover display table-responsive table_border" border="1">
+                                <thead class="lblstyle" id="theadid">
+                                    <tr class="tr_color">
+                                        <th class="text-center">Agencies</th>
+                                        <th class="text-center">Agencies Name</th>
+                                        <th class="text-center">Buying Rate</th>
+                                        <th class="text-center">Total Amount</th>
+                                        <!--<th class="text-center">Rating</th>-->
+                                        <th class="text-center">Reviews</th>
+                                        <th class="text-center">Apply</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyid" class="table_border">
+                                    <tr class="text-center" ng-repeat="fedList in ForeignExchangeDetailsList">
+                                        <td class="border_effect"><img ng-src="{{fedList.PartnerLogo}}" class="img_centered" /></td>
+                                        <td class="border_effect">{{fedList.PartnerName}}</td>
+                                        <td class="border_effect">{{fedList.rate | number : 2}}</td>
+                                        <td class="border_effect">{{fedList.rate * ForexDetails.ForexAmount | number : 2}}</td>
+                                        <!--<td class="border_effect"><img src="assets/images/star_copy.png" class="centeredrating" /></td>-->
+                                        <td class="border_effect"><input type="image" src="assets/images/view.png" /></td>
+                                        <td class="border_effect"><button id="btnApply" type="button" class="btn btn-primary btncolor_green btn_width" ng-click="ApplyRates(ForexDetails.ForexCurrencyId._id, ForexDetails.ForexAmount, fedList.rate, fedList.rate * ForexDetails.ForexAmount);">Apply</button></td>  <!--ForexDetails.Rate=fedList.Rate; ForexDetails.TotalAmt = fedList.Rate * ForexDetails.ForexAmount-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tab Panel for confirmbooking -->
+                <div role="tabpanel" class="tab-pane active " id="confirmbooking" ng-show="tab == 2">
+                    <form name="frmConfirmbookingdetails" novalidate="novalidate" ng-submit="">
+                        <div class="table-responsive">
+                            <table id="Wedgets1" class="table table-hover display  table-responsive table_border" border="1">
+                                <thead class="lblstyle" id="theadid">
+                                    <tr class="tr_color text-center">
+                                        <th class="text-center">Foreign Exchange Currency</th>
+                                        <th class="text-center">Foreign Exchange Amount</th>
+                                        <th class="text-center">Rate Applied</th>
+                                        <th class="text-center">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyid">
+                                    <tr>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.CurrencyName}}</td>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.ForexAmount}}</td>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.Forexrate | number : 2}}</td>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.TotalAmount | number : 2}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="Wedgets2" class="table table-hover display  table-responsive table_border" border="1">
+                                <thead class="lblstyle" id="theadid">
+                                    <tr class="tr_color_cnfBooking ">
+                                        <th class="text-center">Amount</th>
+                                        <th class="text-center">Currency Conversion Service Tax</th>
+                                        <th class="text-center">Insurance Fee</th>
+                                        <th class="text-center">Total Amount(in Rupee)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyid">
+                                    <tr>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.TotalAmount | number : 2}}</td>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.AmountWithCCST= 112 | number : 2}}(Rs)</td>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.AmountWithInsurance = 88 | number : 2}}</td>
+                                        <td class="border_effect text-center">{{ForexCalculationDetails.FinalAmount= ForexCalculationDetails.TotalAmount + ForexCalculationDetails.AmountWithInsurance + ForexCalculationDetails.AmountWithCCST | number : 2}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-6 ">
+                                <label class="labelmargin_top">Total Forex Amount payable ={{ForexCalculationDetails.FinalAmount | number : 2}}</label>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-2">
+                                <button id="btnBackConfirm" type="button" class="btn btncolor_red btn_width btnmargin_top" ng-click="tab = 1">Back</button>
+                            </div>
+                            <div class=" col-md-2">
+                                <button id="btnContinueConfirm" type="submit" class="btn btncolor_green btn_width btnmargin_top" ng-click="tab = 3">Continue</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Tab Panel for personaldetails -->
+                <div role="tabpanel" class="tab-pane active" id="personaldetails" ng-show="tab === 3">
+                    <form name="frmPersonaldetails" novalidate="novalidate" ng-submit="">
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2 ">
+                                <label class="labelmargin_top">First Name</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control disabled" placeholder="first name" required="required" ng-model="UserDetails.FirstName">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Last Name</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control disabled" placeholder="last name" required="required" ng-model="UserDetails.LastName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Email Id</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    <input type="email" class="form-control disabled" placeholder="email id" required="required" ng-model="UserDetails.Email" step="any" ng-pattern="/^.+@.+\..+$/" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Mobile Number</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-phone"></i>
+                                    <input type="text" class="form-control disabled" placeholder="mobile number" required="required" ng-model="UserDetails.ContactNumber" ng-pattern="/^[0-9]*$/" ng-minlength="10" ng-maxlength="10" step="any" reg-ex-input reg-ex="^[0-9]*$" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Gender</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" ng-model="UserDetails.Gender" required="required">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Date Of Birth</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input id="txtdob" type="text" class="form-control" placeholder="date of birth" required="required" ng-model="UserDetails.DOB" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Mother Name</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="mother name" required="required" ng-model="UserDetails.MotherName">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Address</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    <textarea placeholder="address" class="form-control lock_textarea" rows="2" ng-model="UserDetails.AddressLine1" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Pin Code</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="pincode" required="required" ng-model="UserDetails.Pincode" reg-ex-input reg-ex="^[0-9]*$" ng-minlength="6">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">City</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="city" required="required" ng-model="UserDetails.City" reg-ex-input reg-ex="^[a-zA-Z0-9]*$">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Country</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlCountry" ng-model="UserDetails.CountryId" required="required" ng-change="LoadState(UserDetails.CountryId);">
+                                    <option value="">Select Country</option>
+                                    <option ng-repeat="country in CountryList" value="{{country._id}}">{{country.CountryName}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 ">
+                                <label class="labelmargin_top">State</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlState" ng-model="UserDetails.StateId" required="required">
+                                    <option value="">Select State</option>
+                                    <option ng-repeat="state in StateList" value="{{state._id}}">{{state.StateName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Nationality</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="nationality" required="required" ng-model="UserDetails.Nationality">
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-2">
+                                <button id="btnBackPersonal" type="button" class="btn btncolor_red btn_width btnmargin_top" ng-click="tab = 2">Back</button>
+                            </div>
+                            <div class=" col-md-2">
+                                <button id="btnContinuePersonal" type="submit" class="btn btncolor_green btn_width btnmargin_top" ng-click="PersonalDetailsClick(frmPersonaldetails)">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Tab Panel for travellerdetails -->
+                <div role="tabpanel" class="tab-pane active" id="travellerdetails" ng-show="tab === 4">
+                    <form name="frmTravellerdetails" novalidate="novalidate" ng-submit="">
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Travel Days</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="number of travel days" required="required" ng-model="TravelDetails.TravelDays" reg-ex-input reg-ex="^[0-9]*$" ng-minlength="1" ng-maxlength="5" step="any">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Travel Date</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input id="txttraveldate" type="text" class="form-control" placeholder="travel date" required="required" ng-model="TravelDetails.TravelDate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="IsCardReload">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Type Of Visit</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlPlaceOfVisit" ng-model="TravelDetails.TypeofVisit" required="required" ng-required="IsCardReload">
+                                    <option value="">Select Type Of Visit</option>
+                                    <option value="NewVisit">New Visit</option>
+                                    <option value="ExtendedVisit">Extended Visit</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Forex Card Number</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="enter last 4 digit only" required="required" ng-model="UserDetails.ForexCardNumber" ng-required="IsCardReload" reg-ex-input reg-ex="^[0-9]*$" ng-minlength="4" ng-maxlength="4" step="any">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Place Of Visit</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlPlaceOfVisit" ng-model="TravelDetails.PlaceOfVisitId" ng-options="x as x.CountryName for x in CountryList track by x._id" required="required">
+                                    <option value="">Select Place Of Visit</option>
+                                    <!-- <option ng-repeat="country in CountryList" value="{{country._id}}">{{country.CountryName}}</option>-->
+                                </select>
+                                 <!--<select class="form-control" name="ddlPlaceOfVisit" ng-model="TravelDetails.PlaceOfVisitId" required="required">
+                                    <option value="">Select Place Of Visit</option>
+                                    <option ng-repeat="country in CountryList" value="{{country._id}}">{{country.CountryName}}</option>
+                                </select>-->
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Purpose Of Visit</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input type="text" class="form-control" placeholder="purpose of visit" required="required" ng-model="TravelDetails.PurposeOfVisit">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Passport Number</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-file"></i>
+                                    <input type="text" class="form-control" placeholder="passport number" required="required" ng-model="UserDetails.PassportNumber" reg-ex-input reg-ex="^[a-zA-Z0-9_]*$" ng-minlength="8" ng-maxlength="8" step="any" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Passport Isuue Date</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input id="txtpassportissuedate" type="text" class="form-control" required="required" placeholder="passport issue date" ng-model="UserDetails.PassportIssueDate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Passport Expiry Date</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input id="txtpassportexpirydate" type="text" class="form-control" placeholder="passport expiry date" ng-model="UserDetails.PassportExpiryDate" required="required" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Pan Card Number</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-credit-card"></i>
+                                    <input type="text" class="form-control" placeholder="pan card number" ng-model="UserDetails.PanCardNumber" required="required" reg-ex-input reg-ex="^[a-zA-Z0-9_]*$" ng-minlength="10" ng-maxlength="10" step="any" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="IsCardReload">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Delivery Option</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" ng-model="NewCardDetails.DeliveryOptions" required="required" ng-required="IsCardReload">
+                                    <option value="">Select Option</option>
+                                    <option value="walkin">By Walk-In</option>
+                                    <option value="courier">By Courier</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2" ng-show="NewCardDetails.DeliveryOptions =='courier'">
+                                <label class="labelmargin_top">Delivery Address</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin" ng-show="NewCardDetails.DeliveryOptions =='courier'">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    <textarea placeholder="address" class="form-control lock_textarea" rows="2" required="required" ng-required="NewCardDetails.DeliveryOptions =='courier'" ng-model="NewCardDetails.CardDeliveryLocation"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-2">
+                                <button id="btnBackTraveller" type="button" class="btn btncolor_red btn_width btnmargin_top" ng-click="tab = 3">Back</button>
+                            </div>
+                            <div class=" col-md-2">
+                                <button id="btnContinueTraveller" type="submit" class="btn btncolor_green btn_width btnmargin_top" ng-click="TravellerDetailsClick(frmTravellerdetails, UserDetails.PassportIssueDate, UserDetails.PassportExpiryDate);">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Tab Panel for uploaddocuments -->
+                <div role="tabpanel" class="tab-pane active" id="documentupload" ng-show="tab === 5">
+                    <form name="frmDocUpload" novalidate="novalidate" ng-submit="">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Document Type</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <select class="form-control" name="ddlDocumentType" ng-model="DocumentDetails.DocumentTypeId" required="required">
+                                    <option value="">Select Document Type</option>
+                                    <option ng-repeat="document in DocumentsList" value="{{document._id}}">{{document.DocumentType}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Document File</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="file" name="fuDocumentUpload" id="fuDocumentUpload" file-model="myFile" ng-model="DocumentDetails.DocFile" />
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-2">
+                                <button id="btnUploadDocs" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="uploadFile(frmDocUpload)" ng-disabled="IsDocumentUploadDetails">Upload</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btnBackDocumentUpload" type="button" class="btn btncolor_red btn_width120 btnmargin_top" ng-click="tab = 4">Back</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btnSkipDocumentUpload" type="button" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="DocumentUploadSkipClick();">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        <loading></loading>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div class="table-responsive" ng-hide="!DocumentDetailsDiv">
+                        <table ng-table="DocumentDetailsTable" class="table table-bordered table-striped" show-filter="true">
+                            <tr ng-repeat="doc in $data">
+                                <td title="'Document Type'" filter="{ DocumentType: 'text'}" sortable="'DocumentTypeId.DocumentType'">
+                                    {{doc.DocumentTypeId.DocumentType}}
+                                </td>
+                                <td data-title="'Document Name'" filter="{ DocumentName: 'text'}" sortable="'DocumentName'">
+                                    {{doc.DocumentName}}
+                                </td>
+                                <td data-title="'View'" align="center">
+                                    <a ng-href="{{DocumentLink + doc.DocumentPath }}" download><img src="assets/images/view.png"></a>
+                                </td>
+                                <td data-title="'Delete'" align="center">
+                                    <input type="image" src="assets/images/delete.png" ng-click="DeleteDocumentDetails(doc._id,doc.DocumentPath );" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- Tab Panel for beneficiarydetails -->
+                <div role="tabpanel" class="tab-pane active" id="beneficiarydetails" ng-show="tab === 6">
+                    <form name="frmBeneficiarydetails" novalidate="novalidate" ng-submit="">
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Remittance Type</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <select class="form-control" name="ddlRemittanceType" ng-model="Beneficiarydetails.RemittanceType" required="required" disabled>
+                                    <option value="">Select</option>
+                                    <option value="TT">TT</option>
+                                    <option value="DD">DD</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Beneficiary Name</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input id="txtBeneficiaryName" type="text" class="form-control" placeholder="beneficiary name" required="required" ng-model="Beneficiarydetails.BeneficiaryName" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Bank Name</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input id="txtBeneficiaryBankName" type="text" class="form-control" placeholder="beneficiary bank name" required="required" ng-model="Beneficiarydetails.BeneficiaryBankName" />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Bank Address</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input id="txtBeneficiaryBankAddress" type="text" class="form-control" placeholder="beneficiary bank address" required="required" ng-model="Beneficiarydetails.BeneficiaryBankAddress" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <label class="labelmargin_top">Account Number</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input id="txtBeneficiaryAccountNumber" type="text" class="form-control" placeholder="beneficiary account number" required="required" ng-model="Beneficiarydetails.BeneficiaryAccNo" />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="labelmargin_top">Swift Code</label><span class="span_textcolor">*</span>
+                            </div>
+                            <div class="col-md-3 form-group form-group_margin">
+                                <input id="txtSwiftCode" type="text" class="form-control" placeholder="swift code" required="required" ng-model="Beneficiarydetails.SwiftDetails" />
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-2">
+                                <button id="btnBackBeneficary" type="button" class="btn btncolor_red btn_width btnmargin_top" ng-click="tab = 5">Back</button>
+                            </div>
+                            <div class=" col-md-2">
+                                <button id="btnContinueBeneficary" type="submit" class="btn btncolor_green btn_width btnmargin_top" ng-click="BeneficaryDetailsClick(frmBeneficiarydetails);">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Tab Panel for makepayment -->
+                <div role="tabpanel" class="tab-pane active" id="makepayment" ng-show="tab === 7">
+                    <form name="frmMakepaymentdetails" novalidate="novalidate" ng-submit="UpdateRemittanceOrder_Click();">
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-1 col-md-3">
+                                <label>Payment Option</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="radio1" type="radio" name="paymentopt" ng-model="NewCardDetails.PaymentMode" value="cc" required><label for="radio1" class="radiobtnSpacing"><span><span></span></span>Credit Card</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="radio2" type="radio" name="paymentopt" ng-model="NewCardDetails.PaymentMode" value="dc" required><label for="radio2" class="radiobtnSpacing"><span><span></span></span>Debit Card</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-4">
+                                <input id="radio3" type="radio" name="paymentopt" ng-model="NewCardDetails.PaymentMode" value="pp" required><label for="radio3" class="radiobtnSpacing"><span><span></span></span>PayPal</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="radio4" type="radio" name="paymentopt" ng-model="NewCardDetails.PaymentMode" value="nb" required><label for="radio4" class="radiobtnSpacing"><span><span></span></span>NetBanking</label>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="row" ng-if="!NewCardDetails.PaymentMode" role="alert">
+                            <div class="col-md-offset-4 col-md-3">
+                                <label style="color:red; font-weight:400;">Please select payment option</label>
+                            </div>
+                        </div>
+                        <loading></loading>
+                        <div class="row">
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <div class="col-md-offset-4 col-md-2">
+                                <button id="btnBackMakePayment" type="button" class="btn btncolor_red btn_width btnmargin_top" ng-click="tab = 6">Back</button>
+                            </div>
+                            <div class=" col-md-2">
+                                <button id="btnContinueMakePayment" type="submit" class="btn btncolor_green btn_width btnmargin_top" ng-disabled="IsOrderDisbale">Continue & Pay</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

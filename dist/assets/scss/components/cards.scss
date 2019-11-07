@@ -1,0 +1,96 @@
+.card{
+  background-color: $color-white;
+  color: get-text-color($color-white);
+
+  &.bg-blue{
+    background-color: $color-deeper-blue;
+    color: get-text-color($color-deeper-blue);
+  }
+
+  &.sponsor{
+    md-card-header{
+      padding-bottom: 0px;
+    }
+    md-card-content{
+      padding-top: 0px;
+    }
+    md-list-item{
+      padding-left: 0px;
+    }
+
+    .title{
+      color: $color-light-black;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-normal;
+    }
+
+    .text{
+      color: $color-lighter-black;
+      font-size: $font-size-x-small;
+    }
+  }
+
+
+
+  .fund-progress{
+    float:right;
+    padding-bottom:10px;
+    padding-right:20px;
+    padding-left:10px;
+    font-size:$font-size-small;
+  }
+
+  md-menu{
+    padding: 0px;
+  }
+  md-list{
+    padding: 0px;
+  }
+
+  md-card-content{
+    font-size: $font-size-smaller;
+  }
+}
+
+.grey-box{
+
+  background-color: $color-lighter-grey;
+
+  .left-panel{
+    height: auto;
+
+    .logo{
+      margin:10% 10% 5% 10%;
+      padding-left:25px;
+      padding-right:25px;
+      background-color:white;
+    }
+    .md-primary{
+      padding: 2% 5% 2% 5%;
+      width:80%;
+      background-color:$color-light-blue !important;
+    }
+  }
+
+  .right-panel{
+
+    background-color:white;
+
+    .md-icon-button{
+      float:right;
+      padding:10px;
+    }
+
+    .md-title{
+      padding: 0px;
+      font-size: $font-size-small;
+      font-weight: $font-weight-bold;
+      &.md-sub-title{
+        font-size: $font-size-small;
+        &.md-subhead{
+          font-size: $font-size-smaller;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>StudentPaisa</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="keywords" content="StudentPaisa" />
+    <link href="assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendors/angular/css/angular-material.min.css" rel="stylesheet">
+    <link href="assets/vendors/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="assets/css/Login.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="assets/css/fontello.css" rel="stylesheet">
+    <link href="assets/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="assets/css/_all-skins.min.css" rel="stylesheet" />
+    <link href="assets/css/calender.css" rel="stylesheet" />
+    <link href="assets/css/autocomplete.css" rel="stylesheet" />
+    <link href="assets/vendors/sweetalert/css/sweetalert.css" rel="stylesheet" />
+    <link href="assets/vendors/angular/css/ng-table.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition skin-blue sidebar-mini img-responsive">
+    <div class="wrapper" ng-controller="shared.controller">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#/" class="logo mp-corner-logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <div class="logo-mini">
+                    <div class="mp mp-logo-mini"></div>
+                </div>
+                <!-- logo for regular state and mobile devices -->
+                <div class="logo-lg">
+                    <div class="mp mp-logo-lg"></div>
+                </div>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="hamburger_icon ion-navicon-round" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu" ng-cloak>
+                    <ul class="nav navbar-nav">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li id="liTrackTransaction" class="dropdown user user-menu active" ng-if="isUserLoggedIn">
+                            <a href="#/transactionhistory" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="assets/images/Track_transactions.png" class="user-image" alt="Track Transaction">
+                                <span class="hidden-xs footer_text_color">Track Transaction</span>
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu" ng-if="showJoinUs !== 'false'">
+                            <a href="#/login" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="assets/images/login.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs footer_text_color">Join Us</span>
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu" ng-if="isUserLoggedIn">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="assets/images/profile_pic.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs footer_text_color">Welcome <strong>{{loggedInUserName}}</strong></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="assets/images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        <strong>{{loggedInUserFullName}}</strong>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#/userprofile" class="btn btn-default btncolor_green btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="" ng-click="Logout_Click();" class="btn btn-default btncolor_red btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li id="liHome" class="active">
+                        <a href="#/">
+                            <i class="icon-hoem"></i> <span>Home</span>
+                        </a>
+                    </li>
+                    <li id="liForex">
+                        <a href="#/forex">
+                            <i class="icon-fores"></i> <span>Forex</span>
+                        </a>
+                    </li>
+                    <li id="liTravelInsurance" ng-click="TravelInsurance_Click()">
+                        <a href="#/comingsoon">
+                            <i class="icon-travel_insurance"></i> <span>Travel Insurance</span>
+                        </a>
+                    </li>
+                    <li id="liHealthInsurance" ng-click="HealthInsurance_Click()">
+                        <a href="#/comingsoon">
+                            <i class="icon-health_insurance"></i> <span>Health Insurance</span>
+                        </a>
+                    </li>
+                    <li id="liAirTickets" ng-click="AirTickets_Click()">
+                        <a href="#/comingsoon">
+                            <i class="icon-airticket"></i> <span>Air Tickets</span>
+                        </a>
+                    </li>
+                    <li id="liCreditCard" ng-click="CreditCard_Click()">
+                        <a href="#/comingsoon">
+                            <i class="icon-creditcard"></i> <span>Credit Card</span>
+                        </a>
+                    </li>
+                    <li id="liAboutUs" ng-click="AboutUs_Click()">
+                        <a href="#/comingsoon">
+                            <i class="icon-about"></i> <span>About Us</span>
+                        </a>
+                    </li>
+                    <li id="liContactUs" ng-click="ContactUs_Click()">
+                        <a href="#/comingsoon">
+                            <i class="icon-contactus"></i> <span>Contact Us</span>
+                        </a>
+                    </li>
+                    <li id="liGrievance">
+                        <a href="#/grievancelist">
+                            <i class="icon-remmitance"></i> <span>Grievance</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper img_background">
+            <!-- Content body (Page body) -->
+            <section class="content ">
+                <div ng-view></div>
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs footer_text_size">
+                <a data-email="support@studentpaisa.com" href="mailto:support@studentpaisa.com" class="footer_text_color"><img src="assets/images/mail.png" class="footer_imgIcon" />&nbsp;support@studentpaisa.com</a>
+            </div>
+            <div class="col-md-3 subscribebtn_padding">
+                <div class="input-group input_subscribe">
+                    <input type="text" class="form-control" placeholder="enter email ID">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btnSubscribed_color" type="button">Subscribe</button>
+                    </span>
+                </div>
+            </div>
+            <br /><hr />
+            <div class="pull-right hidden-xs footer_text_color footer_text_size">
+                Follow us&nbsp;<a href="http://twitter.com"><img src="assets/images/twitter.png" class="footer_imgIcon" /></a>  <a href="http://facebook.com/rahulsalve1919"><img src="assets/images/facebook.png" class="footer_imgIcon" /></a>  <a href="http:///plus.google.com"><img src="assets/images/google.png" class="footer_imgIcon" /></a>  <a href="http://in.linkedin.com"><img src="assets/images/in.png" class="footer_imgIcon" /></a>
+            </div>
+            <!--<strong class="footer_text_color">Copyright &copy; 2016 <a href="http://studentpaisa.com">StudentPaisa</a>.</strong> All rights reserved.-->
+            <div class="footer_text_color footer_text_size">Copyright &copy; 2016&nbsp;&nbsp;StudentPaisa. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script src="assets/vendors/jquery/js/jquery-2.1.4.min.js"></script>
+    <script src="assets/vendors/jquery/js/jquery-ui.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBoN9w1tJTL2_1Lrg7aQpFvlSnMXIHr6hI"></script>
+    <script src="assets/vendors/angular/js/angular.min.js"></script>
+    <script src="assets/vendors/angular/js/angular-route.js"></script>
+    <script src="assets/vendors/angular/js/angular-cookies.js"></script>
+    <script src="assets/vendors/angular/js/angular-animate.min.js"></script>
+    <script src="assets/vendors/angular/js/angular-aria.min.js"></script>
+    <script src="assets/vendors/angular/js/angular-material.min.js"></script>
+    <script src="assets/vendors/jquery/js/jquery.nicescroll.js"></script>
+    <script src="assets/vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/vendors/custom/apptheme.min.js"></script>
+    <script src="assets/vendors/angular/js/ngStorage.min.js"></script>
+    <script src="assets/vendors/angular/js/angular-messages.min.js"></script>
+    <script src="assets/vendors/custom/jcs-auto-validate.min.js"></script>
+    <script src="assets/vendors/custom/autocomplete.js"></script>
+    <script src="assets/vendors/sweetalert/js/sweetalert.min.js"></script>
+    <script src="assets/vendors/angular/js/angularjs-crypto.js"></script>
+    <script src="assets/vendors/custom/aes.js"></script>
+    <script src="assets/vendors/custom/CryptoJSCipher.js"></script>
+    <script src="assets/vendors/custom/dirPagination.js"></script>
+    <script src="assets/vendors/angular/js/angular-idle.min.js"></script>
+    <script src="assets/vendors/custom/ui-bootstrap-tpls-2.1.3.min.js"></script>
+    <script src="assets/vendors/angular/js/ng-table.min.js"></script>
+    <script src="dist/js/app.js"></script> <!--Before execution please confirm app.js file available in dist/js folder, if not please publish using grunt otherwise it will not executed-->
+
+</body>
+</html>
+
+

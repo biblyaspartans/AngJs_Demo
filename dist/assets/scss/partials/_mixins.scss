@@ -1,0 +1,29 @@
+//greyscale background mixin
+@mixin grey-bg($image-path,$color) {
+  background: url($image-path);
+  -moz-filter: url($image-path);
+  -o-filter: url($image-path);
+  -webkit-filter: grayscale(100%);
+  filter: $color;
+  filter: url($image-path);
+  background-size: 100% auto;
+}
+
+@mixin flexbox($type,$size) {
+  [flex-#{$type}="#{$size}"] {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    //width: #{$size}%;
+    //height: #{$size}%;
+    box-sizing: border-box;
+  }
+}
+
+@function get-text-color($bg-color) {
+  @if ($bg-color == $color-white) {
+    @return $color-light-black; // Lighter backgorund, return dark color
+  } @else {
+    @return $color-light-smoke-white; // Darker background, return light color
+  }
+}

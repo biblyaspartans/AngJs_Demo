@@ -1,0 +1,64 @@
+/*
+Site-wise default font, color, background and common classes
+*/
+
+body{
+  font-weight: $font-weight;
+  color: $color;
+  font-size: $font-size;
+  background-color: $color-smoke-white !important;
+
+  //this is a fix for loading images inside the container
+  img {
+    max-width: 96%;
+    max-height: 100%;
+    margin: 0 auto;
+  }
+
+  //this is a fix for mac machine card overlap issues
+  div{
+    display: block;
+  }
+
+  //none of the links should show any text decoration like underline, blue color on visited.
+  a{
+    color: inherit;
+    &:link{
+      text-decoration: none !important;
+    }
+  }
+
+  i{
+    vertical-align: top !important;
+  }
+  //this is a fix for mac machine card overlap issues
+  @include flexbox('sm',100);
+  @include flexbox('xs',100);
+
+}
+
+//content page background color, it is applid to left navigation panel and content area
+.content-page{
+  background-color: $color-smoke-white !important;
+}
+
+//all the icons will get aligned properly with the adjucent text
+md-icon{
+  vertical-align: top !important;
+}
+
+//vertical separator which comes between the icons/text
+.separator{
+  border-left: thin solid $color-deeper-grey;
+  padding-left: 10px;
+}
+
+//it applies Open Sans font site-wise
+*{
+  font-family: 'Open Sans';
+}
+
+//it will disable the outline/border on focus to any control on the site
+*:focus {
+  outline: none;
+}

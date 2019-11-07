@@ -1,0 +1,74 @@
+.table{
+
+  font-size: $font-size-smaller;
+
+}
+
+
+tr {
+  vertical-align: middle !important;
+  text-transform: uppercase;
+  &.highlighted td {
+    background-color: $color-lighter-grey;
+  }
+}
+
+td {
+  height: 40px !important;
+  padding: 5px !important;
+  color: $color-deeper-grey;
+  .md-button.md-icon-button {
+    height: $height !important;
+    min-height: $min-height !important;
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+}
+
+.bold{
+  color: $color-deeper-black;
+  font-weight: $font-weight-bold;
+}
+
+.red{
+  color:$color-red;
+}
+
+.link{
+  color:$color-blue;
+  @extend .bold;
+}
+
+th {
+  color: $color-deeper-black;
+ & i {
+    font-size: 10px;
+    padding-left: 10px;
+    vertical-align: top;
+  }
+}
+
+.search-box{
+  font-size: $font-size-small;
+  background-color: $color-light-smoke-white;
+  padding: 5px;
+
+  md-icon{
+    height: 100%;
+    text-align: center;
+  }
+  input{
+    font-size: $font-size-small;
+    background-color: $color-light-smoke-white;
+    border:none;
+    font-weight: $font-weight-normal;
+  }
+}
+
+.approve-reject-box{
+  font-size:$font-size-smaller;
+
+  a:first-child {
+    margin-right:10px;
+  }
+}

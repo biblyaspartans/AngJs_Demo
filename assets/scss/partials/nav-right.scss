@@ -1,0 +1,35 @@
+//right navigation menu colors, font weights, padding etc.
+.md-sidenav-right{
+  background-color: $color-black;
+  color: $color-lighter-grey;
+
+  .icon{
+    color: $color-lighter-grey;
+  }
+  .list-item{
+
+    .bullet{
+      padding-right:20px;
+      margin-top:-28px;
+    }
+    .list-item-title{
+      font-size: x-small;
+      font-weight: bolder;
+    }
+    .list-item-body{
+      font-size: x-small;
+      color: $color-deeper-grey;
+    }
+
+  }
+
+  .divider{
+    border-color:$color-deeper-grey;
+    margin:5%;
+  }
+}
+
+.nav-right{
+  background-color: $color-black;
+  color: $color-lighter-grey;
+}

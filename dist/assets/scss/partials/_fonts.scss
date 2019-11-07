@@ -1,0 +1,8 @@
+/*fonts used in the site*/
+/*Open sans*/
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: $font-weight;
+  src: local('Open Sans'), local('OpenSans'), url("/ovid-2.0/assets/fonts/OpenSans.woff2") format('woff2');
+}

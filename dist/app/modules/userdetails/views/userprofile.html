@@ -1,0 +1,684 @@
+﻿<script type="text/javascript">
+    $("#txtfrmdt").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+0" }).val();
+    $("#txttodt").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+0" }).val();
+    $("#txtdob").datepicker({ changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd', maxDate: new Date(), yearRange: "-100:+0" }).val();
+
+    $(document).ready(function () {
+
+        $('#btnContinuePersonalDetails').click(function () {
+            $('#liTab1').removeClass('active');
+            $('#liTab2').addClass('active');
+        });
+
+        $('#btnContinueEducationalDetails').click(function () {
+            $('#liTab2').removeClass('active');
+            $('#liTab3').addClass('active');
+        });
+
+        $('#btnContinueProfessionalDetails').click(function () {
+            $('#liTab3').removeClass('active');
+            $('#liTab4').addClass('active');
+        });
+
+        $('#btnContinueBankDetails').click(function () {
+            $('#liTab4').removeClass('active');
+            $('#liTab5').addClass('active');
+        });
+
+        $('#btnContinueUpload').click(function () {
+            $('#liTab5').removeClass('active');
+            $('#liTab6').addClass('active');
+        });
+
+        $('#btnBackEducationalDetails').click(function () {
+            $('#liTab2').removeClass('active');
+            $('#liTab1').addClass('active');
+        });
+
+        $('#btnBackProfessionalDetails').click(function () {
+            $('#liTab3').removeClass('active');
+            $('#liTab2').addClass('active');
+        });
+
+        $('#btnBackBankDetails').click(function () {
+            $('#liTab4').removeClass('active');
+            $('#liTab3').addClass('active');
+        });
+
+        $('#btnBackUpload').click(function () {
+            $('#liTab5').removeClass('active');
+            $('#liTab4').addClass('active');
+        });
+
+        $('#btnBackAccountSettings').click(function () {
+            $('#liTab6').removeClass('active');
+            $('#liTab5').addClass('active');
+        });
+
+    });
+</script>
+
+<div id="Tabs" role="tabpanel" class="tabpanel_background" ng-cloak>
+    <div class="row divheader_backcolor">
+        <div class="col-md-4">
+            <h3 class="freshCard_header">User Profile</h3>
+        </div>
+    </div>
+    <section class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs " role="tablist">
+            <li id="liTab1" class="active"><a ng-click="tab = 1" aria-controls="#personaldetails" role="tab" data-toggle="tab">Personal details</a></li>
+            <li id="liTab2"><a ng-click="tab = 2" aria-controls="#educationaldetails" role="tab" data-toggle="tab">Educational details</a></li>
+            <li id="liTab3"><a ng-click="tab = 3" aria-controls="#professionaldetails" role="tab" data-toggle="tab">Professional details</a></li>
+            <li id="liTab4"><a ng-click="tab = 4" aria-controls="#bankdetails" role="tab" data-toggle="tab">Bank Details</a></li>
+            <li id="liTab5"><a ng-click="tab = 5" aria-controls="#documentupload" role="tab" data-toggle="tab">Document Upload</a></li>
+            <li id="liTab6"><a ng-click="tab = 6" aria-controls="#accountsetting" role="tab" data-toggle="tab">Account Settings</a></li>
+        </ul>
+        <div class="tab-content panel-body tabpanel_div_background">
+            <!-- Tab Panel for Personal details -->
+            <div role="tabpanel" class="tab-pane active" id="personaldetails" ng-show="tab === 1">
+                <form name="frmUserDetails" novalidate="novalidate" ng-submit="">
+                    <div class="row">
+                        <div class="col-md-offset-10 col-md-1">
+                            <button id="btnContinuePersonalDetails" type="submit" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="tab = 2">Next</button>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div>&nbsp;</div>
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">First Name</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="first name" name="FirstName" ng-model="UserDetails.FirstName" required="required">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Last Name</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="last name" ng-model="UserDetails.LastName" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Email Id</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                <input type="text" class="form-control" placeholder="email id" ng-model="UserDetails.Email" required="required" step="any" ng-pattern="/^.+@.+\..+$/" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Mobile Number</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-phone"></i>
+                                <input type="text" class="form-control" placeholder="mobile number" ng-model="UserDetails.ContactNumber" required="required" ng-pattern="/^[0-9]*$/" ng-minlength="10" ng-maxlength="10" step="any" reg-ex-input reg-ex="^[0-9]*$" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Gender</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" ng-model="UserDetails.Gender">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Mother Name</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="mother's maiden name" ng-model="UserDetails.MotherName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Date Of Birth</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                <input id="txtdob" type="text" class="form-control" placeholder="date of birth" ng-model="UserDetails.DOB" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Nationality</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="nationality" ng-model="UserDetails.Nationality">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Country</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" name="ddlCountry" ng-model="UserDetails.CountryId" ng-change="LoadState(UserDetails.CountryId);">
+                                <option value="">Select Country</option>
+                                <option ng-repeat="country in CountryList" value="{{country._id}}">{{country.CountryName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">State</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" name="ddlState" ng-model="UserDetails.StateId">
+                                <option value="">Select State</option>
+                                <option ng-repeat="state in StateList" value="{{state._id}}">{{state.StateName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Pin Code</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="pincode" ng-model="UserDetails.Pincode">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">City</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="city" ng-model="UserDetails.City">
+                            <!--<input class="form-control" g-places-autocomplete autocompleteoptions ng-model="place" />-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Address</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-map-marker"></i>
+                                <textarea placeholder="address" class="form-control lock_textarea" rows="2" ng-model="UserDetails.AddressLine1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-2">
+                            <button id="btnAddPersonalDetails" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="UpdatePersonalDetails_Click(frmUserDetails);" ng-disabled="IsPersonalDetails">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Tab Panel for Educational Details -->
+            <div role="tabpanel" class="tab-pane active " id="educationaldetails" ng-show="tab == 2">
+                <form name="frmEducationalDetails" novalidate="novalidate" ng-submit="">
+                    <div class="row">
+                        <div class="col-md-offset-9 col-md-1">
+                            <button id="btnBackEducationalDetails" type="button" class="btn btncolor_red btn_width120 btnmargin_top" ng-click="tab = 1">Back</button>
+                        </div>
+                        <div class=" col-md-1">
+                            <button id="btnContinueEducationalDetails" type="button" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="tab = 3">Next</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>&nbsp;</div>
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Course Name</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input id="txtCourseName" name="txtCourseName" type="text" class="form-control" placeholder="course name" ng-model="EducationDetails.CourseName" required="required">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Course type</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" ng-model="EducationDetails.CourseType" required="required">
+                                <option value="">Select</option>
+                                <option value="Bachelor Degree">Bachelor Degree</option>
+                                <option value="Master Degree">Master Degree</option>
+                                <option value="Doctorates">Doctorates</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Course Duration</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" ng-model="EducationDetails.CourseDurationYears" required="required">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 ">
+                            <label class="labelmargin_top">University</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="university" ng-model="EducationDetails.University" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Specialization</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="specialization" ng-model="EducationDetails.Specilization">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Marks Obtained</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="marks obtained" ng-model="EducationDetails.MarksObtained">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Passing Year</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" ng-model="EducationDetails.Year">
+                                <option value="">Select</option>
+                                <option value="2001">2001</option>
+                                <option value="2002">2002</option>
+                                <option value="2003">2003</option>
+                                <option value="2004">2004</option>
+                                <option value="2005">2005</option>
+                                <option value="2006">2006</option>
+                                <option value="2007">2007</option>
+                                <option value="2008">2008</option>
+                                <option value="2009">2009</option>
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">College Name</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="college name" ng-model="EducationDetails.CollegeName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">College Address</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-map-marker"></i>
+                                <textarea placeholder="college address" class="form-control lock_textarea" rows="2" ng-model="EducationDetails.CollegeAddress"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Country</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" name="ddlCountry" ng-model="EducationDetails.CountryId">
+                                <option value="">Select Country</option>
+                                <option ng-repeat="country in CountryList" value="{{country._id}}">{{country.CountryName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-2">
+                            <button id="btnAddEducationDetails" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="UpdateEducationDetails_Click(frmEducationalDetails);" ng-disabled="IsEducationalDetails">{{btnAddEducationDetails}}</button>
+                        </div>
+                    </div>
+                </form>
+                <loading></loading>
+                <div>&nbsp;</div>
+                <div class="table-responsive" ng-hide="!EducationDetailsDiv">
+                    <table ng-table="CourseDetailsTable" class="table table-bordered table-striped" show-filter="true">
+                        <tr ng-repeat="edu in $data">
+                            <td title="'Course Name'" filter="{ CourseName: 'text'}" sortable="'CourseName'">
+                                {{edu.CourseName}}
+                            </td>
+                            <td data-title="'Course type'" filter="{ CourseType: 'text'}" sortable="'CourseType'">
+                                {{edu.CourseType}}
+                            </td>
+                            <td data-title="'Duration'" align="center" filter="{ CourseDurationYears: 'number'}" sortable="'CourseDurationYears'">
+                                {{edu.CourseDurationYears }}
+                            </td>
+                            <td data-title="'University'" filter="{ University: 'text'}" sortable="'University'">
+                                {{edu.University}}
+                            </td>
+                            <td data-title="'College Name'" filter="{ CollegeName: 'text'}" sortable="'CollegeName'">
+                                {{edu.CollegeName}}
+                            </td>
+
+                            <td data-title="'Edit'" align="center">
+                                <input type="image" src="assets/images/edit.png" ng-click="EditEducationDetails(edu._id);" />
+                            </td>
+                            <td data-title="'Delete'" align="center">
+                                <input type="image" src="assets/images/delete.png" ng-click="DeleteEducationDetails(edu._id);" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Tab Panel for Professional Details -->
+            <div role="tabpanel" class="tab-pane active" id="professionaldetails" ng-show="tab === 3">
+                <form name="frmProfessionalDetails" novalidate="novalidate" ng-submit="">
+                    <div class="row">
+                        <div class="col-md-offset-9 col-md-1">
+                            <button id="btnBackProfessionalDetails" type="button" class="btn btncolor_red btn_width120 btnmargin_top" ng-click="tab = 2">Back</button>
+                        </div>
+                        <div class=" col-md-1">
+                            <button id="btnContinueProfessionalDetails" type="button" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="tab = 4">Next</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>&nbsp;</div>
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Company Name</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input id="txtCompanyName" type="text" class="form-control" placeholder="company name" ng-model="ProfessionalDetails.CompanyName" required="required">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Designation</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="designation" ng-model="ProfessionalDetails.Designation" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">From Date</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                <input id="txtfrmdt" type="text" class="form-control" placeholder="from date" ng-model="ProfessionalDetails.FromDate" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">To Date</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                <input id="txttodt" type="text" class="form-control" placeholder="to date" ng-model="ProfessionalDetails.ToDate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Annual Package</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="annual package" ng-model="ProfessionalDetails.AnnualPackage" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Total Experience</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" ng-model="ProfessionalDetails.TotalExperience">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Is Current Employer</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" ng-model="ProfessionalDetails.IsCurrentEmployer" ng-options="o.v as o.n for o in [{ n: 'Yes', v: true }, { n: 'No', v: false }]">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Company address</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-map-marker"></i>
+                                <textarea placeholder="company address" class="form-control lock_textarea" rows="2" ng-model="ProfessionalDetails.CompanyAddress"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-2">
+                            <button id="btnAddProfessionalDetails" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="UpdateProfessionalDetails_Click(frmProfessionalDetails);" ng-disabled="IsProfessionalDetails">{{btnAddProfessionalDetails}}</button>
+                        </div>
+                    </div>
+                </form>
+                <loading></loading>
+                <div>&nbsp;</div>
+                <div class="table-responsive" ng-hide="!ProfessionalDetailsDiv">
+                    <table ng-table="ProfessionalDetailsTable" class="table table-bordered table-striped" show-filter="true">
+                        <tr ng-repeat="prof in $data">
+                            <td title="'Company Name'" filter="{ CompanyName: 'text'}" sortable="'CompanyName'">
+                                {{prof.CompanyName}}
+                            </td>
+                            <td data-title="'Designation'" filter="{ Designation: 'text'}" sortable="'Designation'">
+                                {{prof.Designation}}
+                            </td>
+                            <td data-title="'From Date'" filter="{ FromDate: 'text'}" sortable="'FromDate'">
+                                {{prof.FromDate | date : 'yyyy-MM-dd'}}
+                            </td>
+                            <td data-title="'To Date'" filter="{ ToDate: 'text'}" sortable="'ToDate'">
+                                {{prof.ToDate | date : 'yyyy-MM-dd'}}
+                            </td>
+                            <td data-title="'Total Experience'" align="center" filter="{ TotalExperience: 'text'}" sortable="'TotalExperience'">
+                                {{prof.TotalExperience}}
+                            </td>
+                            <td data-title="'Annual Package'" filter="{ AnnualPackage: 'text'}" sortable="'AnnualPackage'">
+                                {{prof.AnnualPackage}}
+                            </td>
+                            <td data-title="'Edit'" align="center">
+                                <input type="image" src="assets/images/edit.png" ng-click="EditProfessionalDetails(prof._id);" />
+                            </td>
+                            <td data-title="'Delete'" align="center">
+                                <input type="image" src="assets/images/delete.png" ng-click="DeleteProfessionalDetails(prof._id);" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Tab Panel for Bank Details -->
+            <div role="tabpanel" class="tab-pane active" id="bankdetails" ng-show="tab === 4">
+                <form name="frmBankDetails" novalidate="novalidate" ng-submit="">
+                    <div class="row">
+                        <div class="col-md-offset-9 col-md-1">
+                            <button id="btnBackBankDetails" type="button" class="btn btncolor_red btn_width120 btnmargin_top" ng-click="tab = 3">Back</button>
+                        </div>
+                        <div class=" col-md-1">
+                            <button id="btnContinueBankDetails" type="button" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="tab = 5">Next</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>&nbsp;</div>
+                        <div class="col-md-offset-1 col-md-2 ">
+                            <label class="labelmargin_top">Bank Name</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input id="txtBankName" type="text" class="form-control" placeholder="bank name" ng-model="BankDetails.BankName" required="required">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Account Number</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input type="text" class="form-control" placeholder="account number" ng-model="BankDetails.AccountNumber" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Country</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <select class="form-control" name="ddlCountry" ng-model="BankDetails.CountryId" required="required">
+                                <option value="">Select Country</option>
+                                <option ng-repeat="country in CountryList" value="{{country._id}}">{{country.CountryName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="labelmargin_top">Address</label>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <div class="inner-addon right-addon">
+                                <i class="glyphicon glyphicon-map-marker"></i>
+                                <textarea placeholder="bank address" class="form-control lock_textarea" rows="2" ng-model="BankDetails.BankAddress"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-2">
+                            <button id="btnAddBankDetails" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="UpdateBankDetails_Click(frmBankDetails);" ng-disabled="IsBankDetails">{{btnAddBankDetails}}</button>
+                        </div>
+                    </div>
+                </form>
+                <loading></loading>
+                <div>&nbsp;</div>
+                <div class="table-responsive" ng-hide="!BankDetailsDiv">
+                    <table ng-table="BankDetailsTable" class="table table-bordered table-striped" show-filter="true">
+                        <tr ng-repeat="bnk in $data">
+                            <td title="'Bank Name'" filter="{ BankName: 'text'}" sortable="'BankName'">
+                                {{bnk.BankName}}
+                            </td>
+                            <td data-title="'Account Number'" filter="{ AccountNumber: 'text'}" sortable="'AccountNumber'">
+                                {{bnk.AccountNumber}}
+                            </td>
+                            <td data-title="'Country'" filter="{ CountryName: 'text'}" sortable="'CountryName'">
+                                {{bnk.CountryId.CountryName }}
+                            </td>
+                            <td data-title="'Address'" filter="{ BankAddress: 'text'}" sortable="'BankAddress'">
+                                {{bnk.BankAddress}}
+                            </td>
+                            <td data-title="'Edit'" align="center">
+                                <input type="image" src="assets/images/edit.png" ng-click="EditBankDetails(bnk._id);" />
+                            </td>
+                            <td data-title="'Delete'" align="center">
+                                <input type="image" src="assets/images/delete.png" ng-click="DeleteBankDetails(bnk._id);" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Tab Panel for Document upload -->
+            <div role="tabpanel" class="tab-pane active" id="documentupload" ng-show="tab === 5">
+                <form name="frmDocUpload" novalidate="novalidate" ng-submit="">
+                    <div class="row">
+                        <div class="col-md-offset-9 col-md-1">
+                            <button id="btnBackUpload" type="button" class="btn btncolor_red btn_width120 btnmargin_top" ng-click="tab = 4">Back</button>
+                        </div>
+                        <div class="col-md-1">
+                            <button id="btnContinueUpload" type="button" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="tab = 6">Next</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Document Type</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <select class="form-control" name="ddlDocumentType" ng-model="DocumentDetails.DocumentTypeId" required="required">
+                                <option value="">Select Document Type</option>
+                                <option ng-repeat="document in DocumentsList" value="{{document._id}}">{{document.DocumentType}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Document File</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="file" name="fuDocumentUpload" id="fuDocumentUpload" file-model="myFile" ng-model="DocumentDetails.DocFile" />
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-2">
+                            <button id="btnUploadDocs" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="UpdateDocumentDetails_Click(frmDocUpload)" ng-disabled="IsDocumentUploadDetails">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <loading></loading>
+                <div>&nbsp;</div>
+                <div class="table-responsive" ng-hide="!DocumentDetailsDiv">
+                    <table ng-table="DocumentDetailsTable" class="table table-bordered table-striped" show-filter="true">
+                        <tr ng-repeat="doc in $data">
+                            <td title="'Document Type'" filter="{ DocumentType: 'text'}" sortable="'DocumentTypeId.DocumentType'">
+                                {{doc.DocumentTypeId.DocumentType}}
+                            </td>
+                            <td data-title="'Document Name'" filter="{ DocumentName: 'text'}" sortable="'DocumentName'">
+                                {{doc.DocumentName}}
+                            </td>
+                            <td data-title="'View'" align="center">
+                                <a ng-href="{{DocumentLink + doc.DocumentPath }}" download><img src="assets/images/view.png"></a>
+                            </td>
+                            <td data-title="'Delete'" align="center">
+                                <input type="image" src="assets/images/delete.png" ng-click="DeleteDocumentDetails(doc._id,doc.DocumentPath );" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Tab Panel for Account Settings -->
+            <div role="tabpanel" class="tab-pane active" id="accountsetting" ng-show="tab === 6">
+                <div class="row">
+                    <div class="col-md-offset-9 col-md-1">
+                        <button id="btnBackAccountSettings" type="button" class="btn btncolor_red btn_width120 btnmargin_top" ng-click="tab = 5">Back</button>
+                    </div>
+                    <div class=" col-md-1">
+                        <button id="btnContinueAccountSettings" type="button" class="btn btncolor_green btn_width120 btnmargin_top" ng-click="Finish_Click();">Finish</button>
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+                <form name="frmAccountSettings" novalidate="novalidate" ng-submit="">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Current Password</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="password" ng-model="CurrentPassword" class="form-control" placeholder="current password" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">New Password</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="password" ng-model="NewPassword" class="form-control" placeholder="new password" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label class="labelmargin_top">Confirm Password</label><span class="span_textcolor">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="password" ng-model="ConfirmPassword" class="form-control" placeholder="confirm password" required="required">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-2">
+                            <button id="btnupdateAccountSettings" type="submit" class="btn btncolor btn_width120 btnmargin_top" ng-click="ChangePassword_Click(frmAccountSettings);">Change Password</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,59 @@
+<script>
+    $(document).ready(function () {
+        $('ul li ').removeClass('active');
+        $('#liGrievance').addClass('active');
+    });
+</script>
+
+
+<div class="transaction_div_background panel-body">
+    <loading></loading>
+    <div class="row">
+        <div class="col-md-2 float_right">
+            <a href="#/grievance">
+                <button id="btnAddnew" type="button" class="btn btncolor_green btn_width btnmargin_top">Add New</button>
+            </a>
+        </div>
+    </div>
+    <hr />
+    <div class="table-responsive" ng-hide="!GrievanceDetailsDiv">
+        <table ng-table="GrievanceDetailsTable" class="table table-bordered table-striped" show-filter="true">
+            <tr ng-repeat="grv in $data | filter:GrievanceFilter">
+                <td title="'Ticket Number'" filter="{ TicketNumber: 'text'}" sortable="'TicketNumber'">
+                    {{grv.TicketNumber}}
+                </td>
+                <td data-title="'Raised Date'" filter="{ CreatedDatetime: 'text'}" sortable="'CreatedDatetime'">
+                    {{grv.CreatedDatetime | date : 'yyyy-MM-dd'}}
+                </td>
+                <td data-title="'Product'" filter="{ ProductType: 'text'}" sortable="'ProductId.ProductType'">
+                    {{grv.ProductId.ProductType}}
+                </td>
+                <td data-title="'Grievances Type'" filter="{ GrievancesType: 'text'}" sortable="'GrievancesTypeId.GrievancesType'">
+                    {{grv.GrievancesTypeId.GrievancesType}}
+                </td>
+                <td data-title="'ReferenceNumber'" filter="{ ReferenceNumber: 'text'}" sortable="'ReferenceNumber'">
+                    {{grv.ReferenceNumber}}
+                </td>
+                <td data-title="'Status'" align="center" filter="{ Status: 'text'}" sortable="'Status'">
+                    {{grv.Status}}
+                </td>
+                <td data-title="'View'" align="center">
+                    <input type="image" src="assets/images/View.png" ng-click="toggleModal(grv._id);" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" ng-hide="GrievanceDetailsDiv">
+        <div class="col-md-12 nodatadiv_background_color">
+            <div class="centeralign">
+                <h4>No records to display data in grid</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <modal id="popdiv" visible="showModal" tabindex="-1">
+        Any additional data / buttons
+    </modal>
+</div>

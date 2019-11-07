@@ -1,0 +1,32 @@
+.chart{
+
+  .chart-line{
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .pie{
+    width: 80% !important;
+  }
+
+  .pie-legend-color{
+    height:8px;
+    width: 8px;
+  }
+
+  i{
+    font-size: $font-size-large;
+  }
+
+  .ion-arrow-down-b{
+    color: $color-red;
+  }
+  .ion-arrow-up-b{
+    color: $color-green;
+  }
+
+.pie-count{
+ color:$color-light-blue;
+  font-weight: $font-weight-bold;
+}
+
+}

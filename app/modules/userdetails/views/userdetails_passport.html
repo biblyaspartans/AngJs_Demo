@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="margin_top">
+        <br /><br />
+        <h1 class="text-center h1_effect h1_margin text_color">Do You Have Passport..?</h1>
+    </div>
+</div>
+<div class="container-fluid">
+    <section class="main">
+        <ul class="ch-grid">
+            <li>
+                <div id="divYes" class="ch-item-green ch-img-22 Divitem-format" ng-click="passport_sel = 'true'">
+                    <div class="ch-info-green">
+                        <h3>Yes</h3>
+                    </div>
+                </div>
+                <label for="optpassportyes" class="label_headingeffect">Yes</label>
+                <input id="optpassportyes" type="radio" name="passport" ng-model="passport_sel" value="true" class="text-center">
+            </li>
+            <li>
+                <div id="divNo" class="ch-item-purple ch-img-23 Divitem-format" ng-click="passport_sel = 'false'">
+                    <div class="ch-info-purple">
+                        <h3>No</h3>
+                    </div>
+                </div>
+                <label for="optpassportno" class="label_headingeffect">No</label>
+                <input id="optpassportno" type="radio" name="passport" ng-model="passport_sel" value="false" class="text-center">
+            </li>
+        </ul>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div class="row btnmargin">
+            <div class="col-md-offset-5 col-md-2 ">
+                <button type="button" class="btn btncolor btn_width95" ng-click="Passport_Click();">Continue</button>
+            </div>
+        </div>
+    </section>
+</div>
